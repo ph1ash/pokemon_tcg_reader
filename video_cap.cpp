@@ -1,6 +1,6 @@
 #include "opencv2/opencv.hpp"
-#include "ocr.hpp"
 #include <stdlib.h>
+#include <string>
 
 using namespace cv;
 using namespace std;
@@ -137,6 +137,12 @@ int main(int, char**)
         for(int idx = 0; idx < bound_frames.size(); idx++)
         {
             rectangle(frame, bound_frames[idx].tl(), bound_frames[idx].br(), Scalar(255,0,0), 2, 8, 0);
+            Mat temp_mat = frame(bound_frames[idx]);
+            String frame_title = "Image" + to_string(idx);
+            if (!temp_mat.empty())
+            {
+                imshow(frame_title, temp_mat);
+            }
         }
 
         cout<<"Top Left Coord:"<<boundRect.tl()<<"; Bottom Right Coord:"<<boundRect.br()<<endl;
